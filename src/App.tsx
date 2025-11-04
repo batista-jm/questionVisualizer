@@ -16,7 +16,7 @@ function App() {
   //we can reuse interface
   const [difficulties, setDifficulties] = useState<Category[]>([]);
 
-  const [categoryFilter, setCategoryFilter] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState(true);
   const [difficultyFilter, setDifficultyFilter] = useState(false);
   const [specificCategory, setSpecificCategory] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -52,46 +52,50 @@ function App() {
 
   return (
     <>
-      <div>
-        <div className="title">
+      <div className=" p-8 min-h-screen bg-[url('/public/background.svg')]">
+        <div>
           <h1 className="h1 text-center">Question Visualizer</h1>
         </div>
-        <div className="flex m-8">
+        <div className="gap-8 flex max-w-screen-2xl mx-auto my-8 flex-col lg:flex-row items-stretch">
           <div
             id="categoriesSideBar"
-            className="w-[451px] h-[781px] p-12 ml-8 mt-8 border-2 rounded-lg"
+            className="w-full lg:w-1/3 flex-none flex max-h-[calc(100vh-12rem)] flex-col p-6 shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] rounded-lg lg:sticky lg:top-8"
           >
-            <div className="flex mb-5">
-              <a href="#" className="h3 mr-20 w-50">
-                Categories
+            <div className="flex p-5">
+              <a href="#" className="h4 mr-20 w-1/2 ">
+                Questions per Categories
               </a>
-              <a href="#" className="h3 mr-20 w-50">
+              <a href="#" className="text-right h4 mr-20 w-1/2">
                 Questions
               </a>{" "}
             </div>
 
-            <ul className="overflow-y-scroll max-h-[600px]">
-              {/* for each cateogory, enter a new row */}
+            <ul className="flex-1 overflow-y-auto">
+              {/* for each category, enter a new row */}
               {categories.map((categories) => (
-                <div>
-                  <div className="flex items-center">
-                    <li className="w-50">{categories.name}</li>
-                    <li className=" text-center">{categories.count}</li>
-                  </div>
-                  -
+                <div
+                  key={categories.name}
+                  className="flex items-center py-2 border-b last:border-b-0 border-gray-200"
+                >
+                  <li className="flex-1 break-words whitespace-normal pr-3 body">
+                    {categories.name}
+                  </li>
+                  <li className="text-right tabular-nums w-8 body">
+                    {categories.count}
+                  </li>
                 </div>
               ))}
             </ul>
           </div>
-          <div className="flex-col h-781 w-340">
-            <div className="w-340 h-[104] flex">
+          <div className="flex min-w-0 flex-col flex-1 ">
+            <div className="flex mb-4 mt-8  ">
               <Button
                 title="category"
                 isActive={categoryFilter}
                 onClick={() => {
                   setCategoryFilter(!categoryFilter);
                   setSpecificCategory(false);
-                  setDifficultyFilter(false);
+                  setDifficultyFilter(categoryFilter);
                 }}
               />
               <Button
@@ -99,7 +103,7 @@ function App() {
                 isActive={difficultyFilter}
                 onClick={() => {
                   setDifficultyFilter(!difficultyFilter);
-                  setCategoryFilter(false);
+                  setCategoryFilter(difficultyFilter);
                 }}
               />
               <Button
@@ -112,7 +116,13 @@ function App() {
                 }}
               />
             </div>
-            <div className="w-auto h-[678px] p-12 ml-12 align-center border-2 rounded-lg">
+            <div className="w-auto flex-[5] flex-col p-4  h-auto  shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] flex items-center justify-center rounded-lg">
+              <div className="h3">
+                <h2>{categoryFilter && "Distribution by categories"}</h2>
+                <h2>
+                  {difficultyFilter && "Distribution by difficulty level"}
+                </h2>
+              </div>
               {difficultyFilter && <PieChart data={difficulties} />}
               {categoryFilter && <PieChart data={categories} />}
             </div>
