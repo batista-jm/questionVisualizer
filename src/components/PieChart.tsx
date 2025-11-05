@@ -1,6 +1,19 @@
-import { Pie, PieChart, Tooltip } from "recharts";
+import { Pie, PieChart, Tooltip, Cell } from "recharts";
 
-// #region Sample data
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#8884d8",
+  "#82ca9d",
+  "#ffc658",
+  "#ff7c7c",
+  "#a4de6c",
+  "#d0ed57",
+  "#83a6ed",
+  "#8dd1e1",
+];
 
 // Define the data shape used by the chart
 export interface Category {
@@ -30,13 +43,18 @@ export default function TwoLevelPieChart({
     >
       <Pie
         data={data}
+        label={({ value }) => value}
         dataKey="count"
         cx="50%"
         cy="50%"
-        outerRadius="50%"
+        outerRadius="75%"
         fill="#8884d8"
         isAnimationActive={isAnimationActive}
-      />
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
       <Tooltip />
     </PieChart>
   );

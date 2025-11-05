@@ -3,7 +3,7 @@
   color: white;
   font-size: 4rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
   line-height: 1.1;
 }
 
@@ -13,7 +13,7 @@
   color: white;
 
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   line-height: 1.2;
 }
 
@@ -23,14 +23,14 @@
   font-size: 1.5rem;
   color: white;
 
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   line-height: 1.2;
 }
 .h4 {
   font-family: "Funnel Display", ui-sans-serif, system-ui;
   font-weight: 600;
   font-size: 1.2rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   color: white;
 
   line-height: 1.2;
