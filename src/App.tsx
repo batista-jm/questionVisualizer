@@ -31,10 +31,8 @@ function App() {
 
   const [categoryFilter, setCategoryFilter] = useState(true);
   const [difficultyFilter, setDifficultyFilter] = useState(false);
-  const [specificCategory, setSpecificCategory] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -143,7 +141,6 @@ function App() {
                 isActive={categoryFilter}
                 onClick={() => {
                   setCategoryFilter(!categoryFilter);
-                  setSpecificCategory(false);
                   setDifficultyFilter(categoryFilter);
                   setSelectedCategory(null);
                 }}
@@ -165,7 +162,7 @@ function App() {
                   {difficultyFilter &&
                     !selectedCategory &&
                     "distribution by difficulty level"}
-                  {specificCategory &&
+                  {difficultyFilter &&
                     selectedCategory &&
                     `distribution by difficulty level for ${selectedCategory}`}
                 </h2>

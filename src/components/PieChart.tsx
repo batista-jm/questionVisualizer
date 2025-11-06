@@ -19,6 +19,7 @@ const COLORS = [
 export interface Category {
   name: string;
   value: number;
+  label?: string;
   [key: string]: any;
 }
 

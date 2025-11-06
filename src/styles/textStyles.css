@@ -1,5 +1,5 @@
 .h1 {
-  font-family: "Funnel Display", ui-sans-serif, system-ui;
+  font-family: "Inter", ui-sans-serif, system-ui;
   color: white;
   font-size: 4rem;
   font-weight: 700;
@@ -8,7 +8,7 @@
 }
 
 .h2 {
-  font-family: "Funnel Display", ui-sans-serif, system-ui;
+  font-family: "Inter", ui-sans-serif, system-ui;
   font-size: 3rem;
   color: white;
 
@@ -18,7 +18,7 @@
 }
 
 .h3 {
-  font-family: "Funnel Display", ui-sans-serif, system-ui;
+  font-family: "Inter", ui-sans-serif, system-ui;
   font-weight: 600;
   font-size: 1.5rem;
   color: white;
@@ -27,7 +27,7 @@
   line-height: 1.2;
 }
 .h4 {
-  font-family: "Funnel Display", ui-sans-serif, system-ui;
+  font-family: "Inter", ui-sans-serif, system-ui;
   font-weight: 600;
   font-size: 1.2rem;
   letter-spacing: 0.04em;
@@ -37,7 +37,7 @@
 }
 
 .body {
-  font-family: "Funnel Display", ui-sans-serif, system-ui;
+  font-family: "Inter", ui-sans-serif, system-ui;
   font-size: 1rem;
   color: white;
 
