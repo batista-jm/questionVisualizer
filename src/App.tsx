@@ -28,7 +28,7 @@ function App() {
   const [categories, setCategories] = useState<Category[]>([]);
   //we can reuse interface
   const [difficulties, setDifficulties] = useState<Category[]>([]);
-
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
   const [categoryFilter, setCategoryFilter] = useState(true);
   const [difficultyFilter, setDifficultyFilter] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -79,26 +79,40 @@ function App() {
       }))
     : difficulties;
 
+  const sortedCategories = sortOrder
+    ? [...categories].sort((a, b) =>
+        sortOrder === "asc" ? a.count - b.count : b.count - a.count
+      )
+    : categories;
+
   return (
     <>
-      <div className=" p-8 min-h-screen bg-gray-900">
+      <div className=" p-8 bg-gray-900 min-h-screen ">
         <div>
           <h1 className="h1 text-center">question visualizer</h1>
         </div>
-        <div className="gap-8 flex max-w-screen-2xl mx-auto my-8 flex-col lg:flex-row items-stretch">
+        <div className="gap-8 flex max-w-screen-2xl mx-auto my-8 flex-col lg:flex-row items-stretch min-h-0">
           <div
             id="categoriesSideBar"
-            className="w-full lg:w-1/3 flex-none flex max-h-[calc(100vh-12rem)] flex-col p-6 shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] rounded-lg lg:sticky lg:top-8"
+            className="w-full lg:w-1/3 flex-none flex lg:max-h-[calc(100vh-12rem)] flex-col p-6 shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] rounded-lg lg:top-8 overflow-auto"
           >
             <div className="flex p-5">
-              <a href="#" className="h4 mr-20 w-1/2 ">
+              <div
+                className="h4 cursor-pointer hover:bg-white/5 transition-colors flex items-center gap-2"
+                onClick={() => {
+                  if (sortOrder === null) setSortOrder("desc");
+                  else if (sortOrder === "desc") setSortOrder("asc");
+                  else setSortOrder(null);
+                }}
+              >
                 categories
-              </a>
+                {sortOrder === "desc" && " ↓"}
+                {sortOrder === "asc" && " ↑"}
+              </div>
             </div>
-
             <ul className="flex-1 overflow-y-auto">
               {/* for each category, enter a new row */}
-              {categories.map((categories, index) => (
+              {sortedCategories.map((categories, index) => (
                 <div
                   onClick={() => {
                     if (selectedCategory === categories.name) {
@@ -135,7 +149,7 @@ function App() {
             </ul>
           </div>
           <div className="flex min-w-0 flex-col flex-1 ">
-            <div className="flex mb-4 mt-8 relative  cursor-pointer ">
+            <div className="flex mb-4 mt-8 relative cursor-pointer ">
               <Button
                 title="category"
                 isActive={categoryFilter}
@@ -155,7 +169,7 @@ function App() {
               />
             </div>
 
-            <div className="w-auto flex-[5] flex-col p-4  h-auto  shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] flex items-center justify-center rounded-lg">
+            <div className="w-auto flex-1 flex-col p-4 h-auto shadow-[0_50px_100px_-20px_rgba(255,255,255,0.2)] flex items-center justify-center rounded-lg">
               <div className="h3">
                 <h2>
                   {categoryFilter && "distribution by categories"}

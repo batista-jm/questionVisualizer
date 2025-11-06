@@ -1,5 +1,11 @@
 import { Pie, PieChart, Tooltip, Cell } from "recharts";
 
+const DIFFICULTY_COLORS: { [key: string]: string } = {
+  easy: "#22c55e",
+  medium: "#ffff13ff",
+  hard: "#ef4444",
+};
+
 const COLORS = [
   "#0088FE",
   "#00C49F",
@@ -53,7 +59,12 @@ export default function TwoLevelPieChart({
         isAnimationActive={isAnimationActive}
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell
+            key={`cell-${index}`}
+            fill={
+              DIFFICULTY_COLORS[entry.name] || COLORS[index % COLORS.length]
+            }
+          />
         ))}
       </Pie>
       <Tooltip />
