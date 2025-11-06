@@ -24,7 +24,7 @@ const COLORS = [
 // Define the data shape used by the chart
 export interface Category {
   name: string;
-  value: number;
+  count: number;
   label?: string;
   [key: string]: any;
 }
@@ -50,7 +50,7 @@ export default function TwoLevelPieChart({
     >
       <Pie
         data={data}
-        label={({ value }) => value}
+        label={({ value }) => String(value)}
         dataKey="count"
         cx="50%"
         cy="50%"

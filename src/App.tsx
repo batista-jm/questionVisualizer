@@ -18,6 +18,11 @@ const COLORS = [
   "#83a6ed",
   "#8dd1e1",
 ];
+const decode = (text: string): string => {
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = text;
+  return textarea.value;
+};
 function App() {
   interface Category {
     name: string;
@@ -44,7 +49,7 @@ function App() {
       //now we have the data, we retrieve categories and their counts
       const cat = [...new Set(data.results.map((q: any) => q.category))].map(
         (category: any) => ({
-          name: category,
+          name: decode(category),
           count: data.results.filter((q: any) => q.category === category)
             .length,
         })
